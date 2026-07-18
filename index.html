@@ -1,9 +1,543 @@
-v<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-<title>test</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>康足匠人 · 港深健康护理馆</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+            background: #faf7f2;
+            color: #2c2c2c;
+            line-height: 1.6;
+            padding-bottom: 80px;
+        }
+
+        /* ===== Hero ===== */
+        .hero {
+            background: linear-gradient(135deg, #1a6b4f 0%, #145240 100%);
+            color: #fff;
+            padding: 50px 20px 36px;
+            text-align: center;
+            position: relative;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -18px;
+            left: 0; right: 0;
+            height: 36px;
+            background: #faf7f2;
+            border-radius: 50% 50% 0 0;
+        }
+        .hero-icon { font-size: 44px; margin-bottom: 10px; }
+        .hero h1 { font-size: 26px; font-weight: 700; letter-spacing: 2px; }
+        .hero p { font-size: 13px; opacity: 0.85; margin-top: 6px; }
+        .hero-tags {
+            display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;
+            margin-top: 14px;
+        }
+        .hero-tags span {
+            background: rgba(255,255,255,0.15);
+            padding: 4px 12px; border-radius: 20px; font-size: 11px;
+        }
+        .hero .badge {
+            display: inline-block;
+            background: #c17a3a;
+            color: #fff;
+            font-size: 12px;
+            padding: 3px 14px;
+            border-radius: 20px;
+            margin-top: 12px;
+        }
+
+        /* ===== Container ===== */
+        .container { max-width: 480px; margin: 0 auto; padding: 0 14px; }
+
+        /* ===== Section ===== */
+        .section { margin-top: 24px; }
+        .section-title {
+            font-size: 17px; font-weight: 700; color: #1a6b4f;
+            padding-left: 10px; border-left: 3px solid #c17a3a; margin-bottom: 12px;
+        }
+
+        /* ===== Info Card ===== */
+        .info-card {
+            background: #fff; border-radius: 12px; padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin-bottom: 12px;
+        }
+
+        /* ===== Services ===== */
+        .service-group {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            margin-bottom: 14px;
+            overflow: hidden;
+        }
+        .service-header {
+            padding: 14px 16px;
+            display: flex; align-items: center; gap: 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .service-header .icon {
+            font-size: 26px; width: 40px; height: 40px;
+            background: #f0f7f4; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .service-header .name {
+            font-size: 16px; font-weight: 700; color: #2c2c2c;
+        }
+        .service-header .sub {
+            font-size: 12px; color: #999; margin-top: 2px;
+        }
+        .service-desc {
+            padding: 6px 16px 10px;
+            font-size: 12px; color: #888; line-height: 1.5;
+        }
+        .price-table {
+            padding: 0 16px 14px;
+            display: grid; gap: 6px;
+        }
+        .price-row {
+            display: grid;
+            grid-template-columns: 56px 1fr 1fr;
+            gap: 6px;
+            align-items: center;
+        }
+        .price-row .city {
+            font-size: 12px; font-weight: 600; color: #1a6b4f;
+        }
+        .price-row .type {
+            font-size: 12px; color: #555; 
+        }
+        .price-row .price {
+            font-size: 14px; font-weight: 700; color: #c17a3a; text-align: right;
+        }
+        .price-row .price small {
+            font-size: 10px; font-weight: 400; color: #999;
+        }
+        .price-row.header .city,
+        .price-row.header .type,
+        .price-row.header .price {
+            font-size: 11px; font-weight: 400; color: #aaa;
+        }
+        .price-row.header .price { text-align: right; }
+
+        /* ===== Location ===== */
+        .location-card {
+            background: #fff; border-radius: 12px; padding: 14px 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin-bottom: 10px;
+        }
+        .location-card .city-name {
+            font-size: 14px; font-weight: 700; color: #c17a3a; margin-bottom: 4px;
+        }
+        .location-card .addr {
+            font-size: 13px; color: #555;
+        }
+        .location-actions {
+            display: flex; gap: 8px; margin-top: 10px;
+        }
+        .location-actions a {
+            flex: 1; text-align: center; padding: 9px 0; border-radius: 8px;
+            font-size: 13px; font-weight: 500; text-decoration: none; transition: .15s;
+        }
+        .btn-call { background: #1a6b4f; color: #fff; }
+        .btn-call:active { background: #145240; }
+        .btn-nav { background: #e8f0ec; color: #1a6b4f; }
+        .btn-nav:active { background: #d0e3db; }
+
+        /* ===== Contact Bar ===== */
+        .contact-bar { display: flex; gap: 8px; margin: 14px 0; }
+        .contact-bar a {
+            flex: 1; text-align: center; padding: 12px 0; border-radius: 10px;
+            font-size: 14px; font-weight: 600; text-decoration: none;
+        }
+        .contact-bar a:active { opacity: 0.85; }
+        .btn-sz { background: #d4edda; color: #155724; }
+        .btn-hk { background: #fff3cd; color: #856404; }
+
+        /* ===== Booking ===== */
+        .form-card {
+            background: #fff; border-radius: 12px; padding: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .form-group { margin-bottom: 12px; }
+        .form-group label {
+            display: block; font-size: 13px; font-weight: 600; color: #444; margin-bottom: 4px;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%; padding: 10px 12px; border: 1px solid #ddd;
+            border-radius: 8px; font-size: 14px; font-family: inherit;
+            background: #fafafa; transition: .2s;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none; border-color: #1a6b4f; background: #fff;
+        }
+        .form-group textarea { resize: vertical; min-height: 60px; }
+        .form-group select { appearance: auto; }
+        .btn-submit {
+            width: 100%; padding: 14px;
+            background: linear-gradient(135deg, #1a6b4f, #145240);
+            color: #fff; border: none; border-radius: 10px;
+            font-size: 16px; font-weight: 600; cursor: pointer;
+        }
+        .btn-submit:active { transform: scale(0.98); opacity: 0.9; }
+
+        /* ===== Sticky CTA ===== */
+        .sticky-cta {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: #fff; padding: 10px 14px 16px;
+            box-shadow: 0 -2px 12px rgba(0,0,0,0.1);
+            display: flex; gap: 8px; z-index: 100;
+        }
+        .sticky-cta a {
+            flex: 1; text-align: center; padding: 12px 0; border-radius: 10px;
+            font-size: 14px; font-weight: 600; text-decoration: none;
+        }
+        .sticky-cta .wa-sz { background: #25D366; color: #fff; }
+        .sticky-cta .wa-hk { background: #25D366; color: #fff; }
+
+        /* ===== Footer ===== */
+        .footer { text-align: center; padding: 18px; font-size: 12px; color: #aaa; }
+
+        /* ===== Toast ===== */
+        .toast {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            background: #1a6b4f; color: #fff; padding: 12px 24px;
+            border-radius: 8px; font-size: 14px; z-index: 200;
+            opacity: 0; transition: .3s; pointer-events: none;
+        }
+        .toast.show { opacity: 1; }
+
+        @media (max-width: 400px) {
+            .hero h1 { font-size: 22px; }
+            .contact-bar { flex-direction: column; }
+            .location-actions { flex-direction: column; }
+            .price-row { grid-template-columns: 44px 1fr 1fr; }
+        }
+    </style>
 </head>
 <body>
-<p>test content</p>
+
+    <div class="toast" id="toast"></div>
+
+    <!-- ===== Hero ===== -->
+    <div class="hero">
+        <div class="hero-icon">🦶</div>
+        <h1>康足匠人</h1>
+        <p>港深健康护理馆</p>
+        <div class="hero-tags">
+            <span>📍 港深两地</span>
+            <span>🏠 到店 + 上门</span>
+            <span>📅 提前预约</span>
+        </div>
+        <div class="badge">💰 港深价格明细</div>
+    </div>
+
+    <div class="container">
+
+        <!-- ===== Contact Bar ===== -->
+        <div class="contact-bar">
+            <a href="tel:+8617506102640" class="btn-sz">📞 深圳店</a>
+            <a href="tel:+85295564471" class="btn-hk">📞 香港店</a>
+        </div>
+
+        <!-- ===== About ===== -->
+        <div class="section">
+            <div class="section-title">关于我们</div>
+            <div class="info-card">
+                <p>深耕手足健康护理，港深两地服务。<br>
+                工作室环境舒适，亦可预约上门。<br>
+                ✋ <strong>提前预约</strong>，到店或上门均可。</p>
+            </div>
+        </div>
+
+        <!-- ===== Services ===== -->
+
+        <div class="section">
+            <div class="section-title">🌟 核心服务 · 足部问题护理</div>
+
+            <!-- 修脚护理 -->
+            <div class="service-group">
+                <div class="service-header">
+                    <div class="icon">🦶</div>
+                    <div>
+                        <div class="name">修脚护理</div>
+                        <div class="sub">灰指甲 · 甲沟炎 · 鸡眼 · 嵌甲 · 足部问题综合护理</div>
+                    </div>
+                </div>
+                <div class="service-desc">
+                    根据个人情况、严重程度及护理难度评估收费
+                </div>
+                <div class="price-table">
+                    <div class="price-row header">
+                        <div class="city"></div>
+                        <div class="type">工作室到店</div>
+                        <div class="price">上门服务</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="city">🇭🇰 香港</div>
+                        <div class="type">HK$300 起</div>
+                        <div class="price">HK$500 起</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="city">🇨🇳 深圳</div>
+                        <div class="type">¥200 起</div>
+                        <div class="price">¥350 起</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 头疗按摩 -->
+            <div class="service-group">
+                <div class="service-header">
+                    <div class="icon">🧠</div>
+                    <div>
+                        <div class="name">头疗按摩</div>
+                        <div class="sub">头部放松 · 缓解疲劳 · 安神助眠</div>
+                    </div>
+                </div>
+                <div class="price-table">
+                    <div class="price-row header">
+                        <div class="city"></div>
+                        <div class="type">工作室到店</div>
+                        <div class="price">上门服务</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="city">🇭🇰 香港</div>
+                        <div class="type">HK$200 起</div>
+                        <div class="price">HK$350 起</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="city">🇨🇳 深圳</div>
+                        <div class="type">¥150 起</div>
+                        <div class="price">¥250 起</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <div class="section-title">🌿 健康养护服务</div>
+
+            <!-- 采耳护理 -->
+            <div class="service-group">
+                <div class="service-header">
+                    <div class="icon">👂</div>
+                    <div>
+                        <div class="name">采耳护理</div>
+                        <div class="sub">专业采耳 · 耳道清洁 · 放松舒缓</div>
+                    </div>
+                </div>
+                <div class="price-table">
+                    <div class="price-row header">
+                        <div class="city"></div>
+                        <div class="type">工作室到店</div>
+                        <div class="price">上门服务</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="city">🇭🇰 香港</div>
+                        <div class="type">HK$125</div>
+                        <div class="price">HK$200</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="city">🇨🇳 深圳</div>
+                        <div class="type">¥75</div>
+                        <div class="price">¥125</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 痛症调理 -->
+            <div class="service-group">
+                <div class="service-header">
+                    <div class="icon">💪</div>
+                    <div>
+                        <div class="name">痛症调理</div>
+                        <div class="sub">各类疼痛调理 · 经络疏通 · 舒缓不适</div>
+                    </div>
+                </div>
+                <div class="price-table">
+                    <div class="price-row header">
+                        <div class="city"></div>
+                        <div class="type">工作室到店</div>
+                        <div class="price">上门服务</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="city">🇭🇰 香港</div>
+                        <div class="type">HK$250/小时</div>
+                        <div class="price">HK$300–400/小时</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="city">🇨🇳 深圳</div>
+                        <div class="type">¥150/小时</div>
+                        <div class="price">¥250/小时</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 足疗养护 -->
+            <div class="service-group">
+                <div class="service-header">
+                    <div class="icon">🦶</div>
+                    <div>
+                        <div class="name">足疗养护</div>
+                        <div class="sub">足部保养 · 穴位按摩 · 促进循环</div>
+                    </div>
+                </div>
+                <div class="price-table">
+                    <div class="price-row header">
+                        <div class="city"></div>
+                        <div class="type">工作室到店</div>
+                        <div class="price">上门服务</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="city">🇭🇰 香港</div>
+                        <div class="type">HK$150</div>
+                        <div class="price">HK$250</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="city">🇨🇳 深圳</div>
+                        <div class="type">¥100</div>
+                        <div class="price">¥175</div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <!-- ===== Locations ===== -->
+        <div class="section">
+            <div class="section-title">门店地址</div>
+
+            <div class="location-card">
+                <div class="city-name">🇨🇳 深圳 · 罗湖</div>
+                <div class="addr">中建大厦 1801 室</div>
+                <div class="location-actions">
+                    <a href="tel:+8617506102640" class="btn-call">📞 电话预约</a>
+                    <a href="https://uri.amap.com/marker?position=114.1245,22.5487&name=康足匠人-深圳罗湖" class="btn-nav" target="_blank">🗺 导航到店</a>
+                </div>
+            </div>
+
+            <div class="location-card">
+                <div class="city-name">🇭🇰 香港 · 长沙湾</div>
+                <div class="addr">青山道香港工業中心 B 座</div>
+                <div class="location-actions">
+                    <a href="tel:+85295564471" class="btn-call">📞 电话预约</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=香港長沙灣青山道香港工業中心" class="btn-nav" target="_blank">🗺 导航到店</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== Booking ===== -->
+        <div class="section">
+            <div class="section-title">📅 预约服务</div>
+            <div class="form-card">
+                <form id="bookingForm">
+                    <div class="form-group">
+                        <label for="name">姓名 *</label>
+                        <input type="text" id="name" name="name" required placeholder="您的称呼">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">手机号 *</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="方便联系您">
+                    </div>
+                    <div class="form-group">
+                        <label for="service">预约项目 *</label>
+                        <select id="service" name="service" required>
+                            <option value="">请选择服务</option>
+                            <option value="修脚护理">🦶 修脚护理（灰指甲/甲沟炎/鸡眼等）</option>
+                            <option value="采耳护理">👂 采耳护理</option>
+                            <option value="痛症调理">💪 痛症调理</option>
+                            <option value="足疗养护">🦶 足疗养护</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="store">选择门店 *</label>
+                        <select id="store" name="store" required>
+                            <option value="">请选择门店</option>
+                            <option value="深圳罗湖">🇨🇳 深圳 · 罗湖店（到店/上门）</option>
+                            <option value="香港长沙湾">🇭🇰 香港 · 长沙湾店（到店/上门）</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">期望日期</label>
+                        <input type="date" id="date" name="date">
+                    </div>
+                    <div class="form-group">
+                        <label for="note">备注</label>
+                        <textarea id="note" name="note" placeholder="上门的请填详细地址"></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">✅ 提交预约</button>
+                </form>
+                <p style="text-align:center;font-size:12px;color:#999;margin-top:10px;">
+                    提交后通过微信 / WhatsApp 与您确认
+                </p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🦶 康足匠人 · 港深健康护理馆</p>
+            <p style="margin-top:4px;">到店 / 上门均需提前预约</p>
+        </div>
+
+    </div>
+
+    <!-- ===== Sticky CTA ===== -->
+    <div class="sticky-cta">
+        <a href="https://wa.me/8617506102640?text=康足匠人，我想预约服务" class="wa-sz" target="_blank">💬 深圳微信</a>
+        <a href="https://wa.me/85295564471?text=康足匠人，我想預約服務" class="wa-hk" target="_blank">💬 香港 WhatsApp</a>
+    </div>
+
+    <script>
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3000);
+        }
+
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const service = document.getElementById('service').value;
+            const store = document.getElementById('store').value;
+            const date = document.getElementById('date').value;
+            const note = document.getElementById('note').value.trim();
+
+            if (!name || !phone || !service || !store) {
+                showToast('请填写完整信息');
+                return;
+            }
+
+            let msg = `【预约】康足匠人\n`;
+            msg += `姓名：${name}\n`;
+            msg += `电话：${phone}\n`;
+            msg += `项目：${service}\n`;
+            msg += `门店：${store}\n`;
+            if (date) msg += `日期：${date}\n`;
+            if (note) msg += `备注：${note}\n`;
+
+            const num = store === '深圳罗湖' ? '8617506102640' : '85295564471';
+            window.open(`https://wa.me/${num}?text=${encodeURIComponent(msg)}`, '_blank');
+            showToast('✅ 预约信息已发送，请通过微信/WhatsApp确认');
+        });
+
+        const dateInput = document.getElementById('date');
+        if (dateInput) {
+            dateInput.setAttribute('min', new Date().toISOString().split('T')[0]);
+        }
+    </script>
+
 </body>
 </html>
